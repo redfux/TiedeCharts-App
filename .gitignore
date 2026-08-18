@@ -1,0 +1,19 @@
+# dependencies
+node_modules/
+
+# secrets / local config
+.env
+
+# build output
+dist/
+build/
+
+# IDE / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# tooling
+.claude/

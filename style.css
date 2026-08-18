@@ -1,0 +1,343 @@
+/*
+ * App specific layout for TiedeCharts.
+ * thought up by human, coded by ai
+ *
+ * Only tokens from css/design-tokens.css are referenced, never raw colours.
+ * Mobile portrait is the design target; wider screens just centre the column.
+ */
+
+.sprite-host {
+  display: none;
+}
+
+.page {
+  max-width: var(--md-content-max);
+  margin: 0 auto;
+  padding: var(--md-space-4);
+  padding-bottom: 0;
+}
+
+/* --- Location card ---------------------------------------------------- */
+.loc__place,
+.loc__station {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--md-space-3);
+}
+
+.loc__place {
+  color: var(--md-primary);
+}
+
+.loc__station {
+  margin-top: var(--md-space-3);
+  padding-top: var(--md-space-3);
+  border-top: 1px solid var(--md-outline-variant);
+  color: var(--md-on-surface-variant);
+}
+
+.loc__text {
+  min-width: 0;
+  color: var(--md-on-surface);
+}
+
+.loc__name {
+  font-size: var(--md-size-headline);
+  font-weight: var(--md-weight-bold);
+  line-height: 1.2;
+}
+
+.loc__station-name {
+  font-weight: var(--md-weight-medium);
+}
+
+.loc__actions {
+  display: flex;
+  gap: var(--md-space-2);
+  margin-top: var(--md-space-4);
+}
+
+.loc__actions .btn {
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+.banner-slot:not(:empty) {
+  margin-top: var(--md-space-3);
+}
+
+/* --- Hero: next tide -------------------------------------------------- */
+.card--hero {
+  background: var(--md-primary-container);
+  color: var(--md-on-primary-container);
+}
+
+.hero__head {
+  display: flex;
+  align-items: center;
+  gap: var(--md-space-2);
+  font-size: var(--md-size-label);
+  font-weight: var(--md-weight-medium);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.hero__icon {
+  width: 20px;
+  height: 20px;
+}
+
+.hero__time {
+  display: flex;
+  align-items: baseline;
+  gap: var(--md-space-2);
+  margin-top: var(--md-space-1);
+}
+
+.hero__time strong {
+  font-size: var(--md-size-display);
+  font-weight: var(--md-weight-bold);
+  line-height: 1.05;
+  font-variant-numeric: tabular-nums;
+}
+
+.hero__unit {
+  font-size: var(--md-size-title);
+}
+
+.hero__relative {
+  font-size: var(--md-size-body);
+  font-weight: var(--md-weight-medium);
+}
+
+.hero__facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--md-space-2) var(--md-space-6);
+  margin-top: var(--md-space-4);
+  padding-top: var(--md-space-3);
+  border-top: 1px solid color-mix(in oklab, currentColor 22%, transparent);
+}
+
+.fact__label {
+  font-size: var(--md-size-caption);
+  opacity: 0.8;
+}
+
+.fact__value {
+  font-weight: var(--md-weight-bold);
+  font-variant-numeric: tabular-nums;
+}
+
+.hero__note {
+  margin: var(--md-space-3) 0 0;
+  color: inherit;
+  opacity: 0.85;
+}
+
+/* --- Event rows ------------------------------------------------------- */
+.event__icon {
+  width: 20px;
+  height: 20px;
+  color: var(--md-primary);
+}
+
+.event--past {
+  opacity: 0.55;
+}
+
+.event__right {
+  text-align: right;
+}
+
+.event__time {
+  font-weight: var(--md-weight-bold);
+  font-variant-numeric: tabular-nums;
+}
+
+/* --- Chart ------------------------------------------------------------ */
+.chart-wrap {
+  width: 100%;
+  overflow: hidden;
+}
+
+.chart {
+  display: block;
+  width: 100%;
+  height: auto;
+  touch-action: pan-y;
+}
+
+.chart__grid {
+  stroke: var(--chart-grid);
+  stroke-width: 1;
+}
+
+.chart__grid--v {
+  stroke-dasharray: 2 4;
+}
+
+.chart__axis {
+  font-size: 10px;
+  fill: var(--chart-axis-text);
+}
+
+.chart__night {
+  fill: var(--chart-night);
+}
+
+.chart__grad-from {
+  stop-color: var(--chart-fill-strong);
+}
+
+.chart__grad-to {
+  stop-color: var(--chart-fill-soft);
+}
+
+.chart__line {
+  fill: none;
+  stroke: var(--chart-line);
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.chart__marker {
+  fill: var(--chart-line);
+  stroke: var(--chart-surface-ring);
+  stroke-width: 2;
+}
+
+.chart__marker-label {
+  font-size: 10.5px;
+  font-weight: var(--md-weight-bold);
+  fill: var(--md-on-surface-variant);
+}
+
+.chart__now-line {
+  stroke: var(--chart-now);
+  stroke-width: 1.5;
+  stroke-dasharray: 3 3;
+}
+
+.chart__now-dot {
+  fill: var(--chart-now);
+  stroke: var(--chart-surface-ring);
+  stroke-width: 2;
+}
+
+.chart__hover {
+  visibility: hidden;
+}
+
+.chart__hover--on {
+  visibility: visible;
+}
+
+.chart__hover-line {
+  stroke: var(--md-outline);
+  stroke-width: 1;
+}
+
+.chart__hover-dot {
+  fill: var(--chart-line);
+  stroke: var(--chart-surface-ring);
+  stroke-width: 2;
+}
+
+.chart__hover-box {
+  fill: var(--md-surface-container-high);
+  stroke: var(--md-outline-variant);
+}
+
+.chart__hover-time {
+  font-size: 11px;
+  font-weight: var(--md-weight-bold);
+  fill: var(--md-on-surface);
+}
+
+.chart__hover-value {
+  font-size: 11px;
+  fill: var(--md-on-surface-variant);
+}
+
+.chart__surface {
+  fill: transparent;
+}
+
+.chart-note {
+  margin: var(--md-space-2) 0 0;
+}
+
+/* --- Forecast accordion ---------------------------------------------- */
+.acc__day {
+  flex: 0 0 auto;
+}
+
+.acc__preview {
+  flex: 1 1 auto;
+  text-align: right;
+  font-size: var(--md-size-caption);
+  font-weight: var(--md-weight-regular);
+  color: var(--md-on-surface-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.acc__body {
+  padding: 0 0 var(--md-space-3);
+}
+
+/* --- Picker ----------------------------------------------------------- */
+.picker {
+  margin-top: var(--md-space-4);
+}
+
+.picker__title {
+  margin: var(--md-space-4) 0 var(--md-space-1);
+  font-size: var(--md-size-label);
+  font-weight: var(--md-weight-bold);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--md-on-surface-variant);
+}
+
+.picker__title:first-child {
+  margin-top: 0;
+}
+
+/* --- Skeleton --------------------------------------------------------- */
+.skeleton-stack {
+  display: grid;
+  gap: var(--md-space-2);
+}
+
+.skeleton__row {
+  height: 20px;
+}
+
+.skeleton__row:first-child {
+  width: 60%;
+  height: 28px;
+}
+
+/* --- Footer ----------------------------------------------------------- */
+.footer__note {
+  margin: 0 auto var(--md-space-2);
+  max-width: 34em;
+}
+
+.footer__meta {
+  margin: 0;
+  opacity: 0.85;
+}
+
+/* --- Wider screens: tablet is the widest supported target ------------- */
+@media (min-width: 700px) {
+  .page {
+    padding: var(--md-space-6) var(--md-space-5) 0;
+  }
+
+  .hero__time strong {
+    font-size: 2.75rem;
+  }
+}

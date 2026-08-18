@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; form-action 'none'; img-src 'self' data:; style-src 'self'; script-src 'self'; manifest-src 'self'; connect-src 'self' https://marine-api.open-meteo.com https://geocoding-api.open-meteo.com">
+  <title>TiedeCharts – Ebbe und Flut</title>
+  <meta name="description" content="Gezeiten, Hoch- und Niedrigwasserzeiten und Tidenverlauf für europäische Küstenstandorte.">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#11242c" media="(prefers-color-scheme: dark)">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="TiedeCharts">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="assets/icon-180.png">
+  <link rel="stylesheet" href="css/design-tokens.css">
+  <link rel="stylesheet" href="css/design-components.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Icon sprite is injected here at runtime by js/ui.js. -->
+  <div id="sprite-host" class="sprite-host" aria-hidden="true"></div>
+
+  <header class="appbar">
+    <svg class="appbar__mark" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+      <g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+        <path d="M2 8q2.5-3 5 0t5 0t5 0"/>
+        <path d="M2 13q2.5-3 5 0t5 0t5 0"/>
+        <path d="M2 18q2.5-3 5 0t5 0t5 0"/>
+      </g>
+    </svg>
+    <h1 class="appbar__title">TiedeCharts</h1>
+    <button id="btn-theme" class="btn btn--icon" type="button" aria-label="Farbschema wechseln"></button>
+    <button id="btn-refresh" class="btn btn--icon" type="button" aria-label="Daten neu laden" title="Daten neu laden">
+      <svg class="i" aria-hidden="true" focusable="false"><use href="#ic-refresh"></use></svg>
+    </button>
+  </header>
+
+  <main class="page">
+    <section class="card" aria-labelledby="location-heading">
+      <h2 id="location-heading" class="sr-only">Ort und Messstation</h2>
+      <div id="location" class="loc"></div>
+      <div class="loc__actions">
+        <button id="btn-locate" class="btn btn--tonal" type="button">
+          <svg class="i i--sm" aria-hidden="true" focusable="false"><use href="#ic-my-location"></use></svg>
+          Standort
+        </button>
+        <button id="btn-station" class="btn btn--tonal" type="button">
+          <svg class="i i--sm" aria-hidden="true" focusable="false"><use href="#ic-search"></use></svg>
+          Ort oder Station wählen
+        </button>
+      </div>
+    </section>
+
+    <div id="banner" class="banner-slot"></div>
+
+    <section class="card card--hero" aria-labelledby="hero-heading">
+      <h2 id="hero-heading" class="sr-only">Nächster Gezeitenwechsel</h2>
+      <div id="hero" class="hero"></div>
+    </section>
+
+    <section class="card" aria-labelledby="today-heading">
+      <div class="card__head">
+        <h2 id="today-heading" class="card__title">Heute</h2>
+      </div>
+      <div id="today"></div>
+    </section>
+
+    <section class="card" aria-labelledby="chart-heading">
+      <div class="card__head">
+        <h2 id="chart-heading" class="card__title">Tidenverlauf heute</h2>
+        <span id="freshness" class="meta"></span>
+      </div>
+      <div id="chart" class="chart-wrap"></div>
+      <p id="chart-note" class="meta chart-note"></p>
+    </section>
+
+    <section class="card" aria-labelledby="forecast-heading">
+      <div class="card__head">
+        <h2 id="forecast-heading" class="card__title">Nächste Tage</h2>
+      </div>
+      <div id="forecast"></div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p class="footer__note">
+      Gezeitendaten: <span class="footer__source">Open-Meteo Marine API</span> (CC BY 4.0), Modellwerte über
+      mittlerem Meeresspiegel. <strong>Nicht für die Navigation verwenden.</strong>
+    </p>
+    <p class="footer__meta">thought up by human, coded by ai · <span id="version"></span></p>
+  </footer>
+
+  <dialog id="sheet" class="sheet" aria-labelledby="sheet-title">
+    <div class="sheet__head">
+      <h2 id="sheet-title" class="sheet__title">Ort oder Station wählen</h2>
+      <button id="sheet-close" class="btn btn--icon" type="button" aria-label="Schließen">
+        <svg class="i" aria-hidden="true" focusable="false"><use href="#ic-close"></use></svg>
+      </button>
+    </div>
+    <div class="sheet__body">
+      <label class="field">
+        <svg class="i i--sm" aria-hidden="true" focusable="false"><use href="#ic-search"></use></svg>
+        <input id="search" type="search" inputmode="search" autocomplete="off"
+               placeholder="Ort oder Station suchen" aria-label="Ort oder Station suchen">
+      </label>
+      <div id="picker-results" class="picker"></div>
+    </div>
+  </dialog>
+
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>

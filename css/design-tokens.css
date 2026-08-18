@@ -1,0 +1,173 @@
+/*
+ * Design tokens - Marine theme
+ * thought up by human, coded by ai
+ *
+ * Single source of truth for colour, typography, spacing, radii and elevation.
+ * Rebranding means replacing the values in this file only; components and app
+ * styles must never contain raw colour values.
+ */
+
+:root {
+  /* --- Typography ------------------------------------------------------ */
+  --md-font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --md-font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+
+  --md-size-display: 2.25rem;
+  --md-size-headline: 1.375rem;
+  --md-size-title: 1.0625rem;
+  --md-size-body: 0.9375rem;
+  --md-size-label: 0.8125rem;
+  --md-size-caption: 0.75rem;
+
+  --md-weight-regular: 400;
+  --md-weight-medium: 500;
+  --md-weight-bold: 600;
+
+  /* --- Spacing (4px base) --------------------------------------------- */
+  --md-space-1: 4px;
+  --md-space-2: 8px;
+  --md-space-3: 12px;
+  --md-space-4: 16px;
+  --md-space-5: 20px;
+  --md-space-6: 24px;
+  --md-space-8: 32px;
+
+  /* --- Radii ---------------------------------------------------------- */
+  --md-radius-xs: 6px;
+  --md-radius-sm: 10px;
+  --md-radius-md: 16px;
+  --md-radius-lg: 22px;
+  --md-radius-full: 999px;
+
+  /* --- Layout --------------------------------------------------------- */
+  --md-content-max: 640px;
+  --md-touch-target: 44px;
+
+  /* --- Motion --------------------------------------------------------- */
+  --md-motion-fast: 120ms;
+  --md-motion-base: 220ms;
+  --md-motion-ease: cubic-bezier(0.2, 0, 0, 1);
+
+  /* --- Colour: light scheme (default) --------------------------------- */
+  --md-primary: #00658f;
+  --md-on-primary: #ffffff;
+  --md-primary-container: #cbe6f7;
+  --md-on-primary-container: #001e2f;
+
+  --md-secondary: #00696e;
+  --md-on-secondary: #ffffff;
+  --md-secondary-container: #c9eced;
+  --md-on-secondary-container: #002022;
+
+  --md-surface: #f1f6f9;
+  --md-surface-container: #ffffff;
+  --md-surface-container-high: #e5eff5;
+  --md-on-surface: #0f1c22;
+  --md-on-surface-variant: #42595f;
+  --md-on-surface-muted: #5d757d;
+
+  --md-outline: #6c848d;
+  --md-outline-variant: #c4d5dd;
+
+  --md-error: #a4322b;
+  --md-on-error: #ffffff;
+  --md-error-container: #ffdad5;
+  --md-on-error-container: #410002;
+
+  --md-warning-container: #ffe1b2;
+  --md-on-warning-container: #3b2600;
+
+  --md-scrim: rgba(9, 25, 32, 0.45);
+  --md-shadow-1: 0 1px 2px rgba(9, 25, 32, 0.10), 0 1px 3px rgba(9, 25, 32, 0.06);
+  --md-shadow-2: 0 4px 10px rgba(9, 25, 32, 0.12), 0 2px 4px rgba(9, 25, 32, 0.08);
+
+  /* --- Chart tokens --------------------------------------------------- */
+  --chart-line: #00658f;
+  --chart-fill-strong: color-mix(in oklab, var(--chart-line) 26%, transparent);
+  --chart-fill-soft: color-mix(in oklab, var(--chart-line) 4%, transparent);
+  --chart-grid: color-mix(in oklab, var(--md-outline) 32%, transparent);
+  --chart-axis-text: var(--md-on-surface-muted);
+  --chart-now: #b1550a;
+  --chart-night: color-mix(in oklab, var(--md-on-surface) 6%, transparent);
+  --chart-surface-ring: var(--md-surface-container);
+}
+
+/* Dark scheme: deliberately chosen steps, not an automatic inversion. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --md-primary: #7fd0f5;
+    --md-on-primary: #00344a;
+    --md-primary-container: #004c69;
+    --md-on-primary-container: #c5e7f9;
+
+    --md-secondary: #80d4d8;
+    --md-on-secondary: #003739;
+    --md-secondary-container: #004f52;
+    --md-on-secondary-container: #9cf1f5;
+
+    --md-surface: #0a1a21;
+    --md-surface-container: #11242c;
+    --md-surface-container-high: #1a3038;
+    --md-on-surface: #dee7ec;
+    --md-on-surface-variant: #a9bfc8;
+    --md-on-surface-muted: #90a7b0;
+
+    --md-outline: #859ca5;
+    --md-outline-variant: #2c4249;
+
+    --md-error: #ffb4aa;
+    --md-on-error: #56100a;
+    --md-error-container: #7a2820;
+    --md-on-error-container: #ffdad5;
+
+    --md-warning-container: #5a3d00;
+    --md-on-warning-container: #ffdfae;
+
+    --md-scrim: rgba(0, 0, 0, 0.6);
+    --md-shadow-1: 0 1px 2px rgba(0, 0, 0, 0.4);
+    --md-shadow-2: 0 4px 12px rgba(0, 0, 0, 0.5);
+
+    --chart-line: #62c9ef;
+    --chart-now: #f2ab6b;
+    --chart-night: color-mix(in oklab, #ffffff 6%, transparent);
+  }
+}
+
+/* Manual override wins in both directions. */
+:root[data-theme="dark"] {
+  --md-primary: #7fd0f5;
+  --md-on-primary: #00344a;
+  --md-primary-container: #004c69;
+  --md-on-primary-container: #c5e7f9;
+
+  --md-secondary: #80d4d8;
+  --md-on-secondary: #003739;
+  --md-secondary-container: #004f52;
+  --md-on-secondary-container: #9cf1f5;
+
+  --md-surface: #0a1a21;
+  --md-surface-container: #11242c;
+  --md-surface-container-high: #1a3038;
+  --md-on-surface: #dee7ec;
+  --md-on-surface-variant: #a9bfc8;
+  --md-on-surface-muted: #90a7b0;
+
+  --md-outline: #859ca5;
+  --md-outline-variant: #2c4249;
+
+  --md-error: #ffb4aa;
+  --md-on-error: #56100a;
+  --md-error-container: #7a2820;
+  --md-on-error-container: #ffdad5;
+
+  --md-warning-container: #5a3d00;
+  --md-on-warning-container: #ffdfae;
+
+  --md-scrim: rgba(0, 0, 0, 0.6);
+  --md-shadow-1: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --md-shadow-2: 0 4px 12px rgba(0, 0, 0, 0.5);
+
+  --chart-line: #62c9ef;
+  --chart-now: #f2ab6b;
+  --chart-night: color-mix(in oklab, #ffffff 6%, transparent);
+}

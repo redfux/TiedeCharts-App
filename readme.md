@@ -20,6 +20,10 @@ ebenfalls, der Desktop ist kein Zielszenario.
 - **Nächste Tage**: sechs Folgetage, je Tag ausklappbar.
 - **Offline**: App-Shell im Service Worker, letzte Gezeitendaten pro Station im
   `localStorage`. Ohne Netz werden die gespeicherten Werte mit Altersangabe gezeigt.
+- **Aktualisieren**: geschieht von selbst – beim Start und beim Zurückholen in den Vordergrund,
+  sobald der gespeicherte Stand älter als drei Stunden ist. Ein Neuladen der Seite
+  (auf dem Handy die Zieh-Geste nach unten) erzwingt einen frischen Abruf. Rechts über dem
+  Diagramm steht, wie alt die angezeigten Daten sind.
 - **Light/Dark/Auto** mit Umschalter in der Appbar.
 
 ## Datenquelle

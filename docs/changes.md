@@ -19,6 +19,11 @@ _Noch keine Wünsche eingetragen._
 
 ## Erledigt
 
+- „Button entfernen, zum manuellen aktualisieren kann ich auch den Screen nach unten ziehen und
+  wieder hoch schnippsen lassen, wie im Browser auch.."
+  ✅ 19.08.2026 – Aktualisieren-Knopf entfernt; ein Reload erzwingt nun einen frischen Abruf,
+  damit die Zieh-Geste tatsächlich neue Daten holt. Siehe v0.1.7 in `releases.md`.
+
 - „wenn ich im Firefox auf die Aufklapp-Pfeile bei der Vorschau tippe, markiert er immer
   irgendetwas und der Kopieren-Dialog öffnet sich […] unter Chrome tritt das Problem nicht auf"
   ✅ 19.08.2026 – Bedienelemente und Diagramm von der Textauswahl ausgenommen

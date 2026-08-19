@@ -161,6 +161,13 @@ Zwei getrennte Ebenen:
 Gespeichert werden außerdem die Einstellungen (`tiedecharts.prefs`): gewählte Station,
 Ortsbezeichnung, Farbschema und ob dem Gerätestandort gefolgt wird.
 
+Ein manuelles Neuladen der Seite – auf dem Handy die Zieh-Geste – umgeht den Datencache
+bewusst: `js/app.js` erkennt über `performance.getEntriesByType('navigation')`, dass die
+Ansicht aus einem Reload stammt, und lädt die Serie beim ersten Stationsaufruf neu. Ohne das
+würde die Geste nur die Hülle neu aufbauen und danach den noch frischen Cache lesen, also
+wirkungslos erscheinen. Ein eigener Aktualisieren-Knopf entfällt deshalb (siehe
+`docs/releases.md`, 0.1.7).
+
 ## Wo die Versionsnummer steht
 
 Im Meta-Tag `app-version` in `index.html` – und nur dort. Das ist keine Stilfrage, sondern

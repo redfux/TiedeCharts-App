@@ -4,6 +4,23 @@ Format nach [Keep a Changelog](https://keepachangelog.com/de/1.1.0/), Versionier
 [SemVer](https://semver.org/lang/de/). Die Versionsnummer wird ausschließlich im Meta-Tag
 `app-version` in `index.html` gepflegt; `js/version.js` liest sie von dort.
 
+## [0.1.7] – 2026-08-19
+
+### Removed
+
+- Der Aktualisieren-Knopf in der Appbar. Er löste zwar einen Abruf aus, aber ohne sichtbare
+  Wirkung: die Modellvorhersage ändert sich zwischen zwei Abrufen praktisch nicht, und die
+  einzige Rückmeldung war die Altersangabe, die meist schon „gerade aktualisiert" zeigte. Ein
+  Bedienelement ohne erkennbare Wirkung ist ein Fehler in der Oberfläche.
+
+### Changed
+
+- Ein Neuladen der Seite (auf dem Handy die Zieh-Geste) erzwingt jetzt einen frischen Abruf.
+  Ohne das hätte die Geste nur die App-Hülle neu aufgebaut und danach den bis zu drei Stunden
+  gültigen Datencache gelesen – sie hätte also genauso wirkungslos gewirkt wie der entfernte
+  Knopf. Automatisch aktualisiert die App weiterhin beim Start und beim Zurückholen in den
+  Vordergrund, sobald der Stand älter als drei Stunden ist.
+
 ## [0.1.6] – 2026-08-19
 
 ### Fixed

@@ -36,6 +36,14 @@ const GEO_WATCHDOG_MS = 15000;
 const SEARCH_DEBOUNCE_MS = 350;
 const TICK_MS = 60000;
 
+/**
+ * True when this page view came from an explicit reload - on a phone that is the
+ * pull to refresh gesture. Without this the reload would only rebuild the shell
+ * and then read the still fresh local cache, so the gesture would look like it
+ * did nothing. Consumed by the first load of a station.
+ */
+let reloadRequested = isReloadNavigation();
+
 const dom = {};
 const state = {
   station: null,
@@ -66,7 +74,7 @@ document.addEventListener('DOMContentLoaded', () => {
 /** Collect the static elements of the shell once. */
 function cacheDom() {
   const ids = ['spriteHost', 'location', 'banner', 'hero', 'today', 'chart', 'chartNote', 'freshness',
-    'forecast', 'version', 'btnTheme', 'btnRefresh', 'btnLocate', 'btnStation', 'sheet', 'sheetClose',
+    'forecast', 'version', 'btnTheme', 'btnLocate', 'btnStation', 'sheet', 'sheetClose',
     'search', 'pickerResults'];
   for (const id of ids) {
     dom[id] = document.getElementById(id.replace(/[A-Z]/g, (m) => `-${m.toLowerCase()}`));
@@ -76,9 +84,6 @@ function cacheDom() {
 /** Attach the interaction handlers of the shell. */
 function wireEvents() {
   dom.btnTheme.addEventListener('click', cycleTheme);
-  dom.btnRefresh.addEventListener('click', () => {
-    if (state.station) loadStation(state.station, { force: true });
-  });
   dom.btnLocate.addEventListener('click', () => useDeviceLocation({ interactive: true }));
   dom.btnStation.addEventListener('click', openPicker);
   dom.sheetClose.addEventListener('click', () => dom.sheet.close());
@@ -219,9 +224,10 @@ function locationFallback(message) {
  */
 async function loadStation(station, { force = false, silent = false }) {
   state.station = station;
+  const mustRefetch = force || consumeReloadRequest();
   const cached = readCache(station.id);
 
-  if (cached && !force && isUsable(cached) && Date.now() - cached.fetchedAt < CACHE_FRESH_MS) {
+  if (cached && !mustRefetch && isUsable(cached) && Date.now() - cached.fetchedAt < CACHE_FRESH_MS) {
     applySeries(cached.series, cached.fetchedAt, { stale: false, offsetUsed: cached.offsetUsed });
     return;
   }
@@ -233,7 +239,6 @@ async function loadStation(station, { force = false, silent = false }) {
     renderSkeleton(dom.hero, 2);
   }
 
-  dom.btnRefresh.disabled = true;
   try {
     const series = await fetchSeaLevel(station.lat, station.lon);
     const fetchedAt = Date.now();
@@ -262,8 +267,6 @@ async function loadStation(station, { force = false, silent = false }) {
       fill(dom.today, el('p', 'meta', 'Keine Daten verfügbar.'));
       fill(dom.hero, el('p', 'meta', 'Keine Daten verfügbar.'));
     }
-  } finally {
-    dom.btnRefresh.disabled = false;
   }
 }
 
@@ -635,6 +638,29 @@ function writeCache(stationId, entry) {
 }
 
 /* ------------------------------------------------------------------ helpers */
+
+/**
+ * Was this page view started by a reload?
+ * @returns {boolean}
+ */
+function isReloadNavigation() {
+  try {
+    const [entry] = performance.getEntriesByType('navigation');
+    return Boolean(entry && entry.type === 'reload');
+  } catch {
+    return false;
+  }
+}
+
+/**
+ * Read and clear the reload flag, so only the first station load skips the cache.
+ * @returns {boolean}
+ */
+function consumeReloadRequest() {
+  if (!reloadRequested) return false;
+  reloadRequested = false;
+  return true;
+}
 
 /**
  * @param {Function} fn

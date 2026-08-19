@@ -7,7 +7,7 @@
   <!-- Single source of truth for the app version. It lives in the document
        because index.html is always fetched network first and can therefore never
        be served from a stale cache; js/version.js reads it from here. -->
-  <meta name="app-version" content="0.1.6">
+  <meta name="app-version" content="0.1.7">
   <title>TiedeCharts – Ebbe und Flut</title>
   <meta name="description" content="Gezeiten, Hoch- und Niedrigwasserzeiten und Tidenverlauf für europäische Küstenstandorte.">
   <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
@@ -36,9 +36,6 @@
     </svg>
     <h1 class="appbar__title">TiedeCharts</h1>
     <button id="btn-theme" class="btn btn--icon" type="button" aria-label="Farbschema wechseln"></button>
-    <button id="btn-refresh" class="btn btn--icon" type="button" aria-label="Daten neu laden" title="Daten neu laden">
-      <svg class="i" aria-hidden="true" focusable="false"><use href="#ic-refresh"></use></svg>
-    </button>
   </header>
 
   <main class="page">

@@ -19,6 +19,12 @@ _Noch keine Wünsche eingetragen._
 
 ## Erledigt
 
+- „das mit dem 2*2 Raster was wir vorhin designt haben sieht nicht so cool aus. baue das
+  wieder auf die 1*3 varient von vorher zurück und setzt den Tiedenhub ganz rechts neben die
+  große Anzeige mit der Uhrzeit, aber genauso kleine von der Schriftart wie Jetzt"
+  ✅ 19.08.2026 – Kennzahlen wieder einzeilig zu drei; Tidenhub rechts neben der Uhrzeit in
+  der kleinen Kennzahlen-Schrift. Siehe v0.1.3 in `releases.md`.
+
 - „kannst du in der Übersicht vom aktuellen Standort rechts neben der Tendenz noch den Wert
   für den Max. Tiedenhub an dem Tag in m angeben"
   ✅ 19.08.2026 – Kennzahl „Tidenhub" in der Übersichtskarte ergänzt (maximaler Tidenhub des

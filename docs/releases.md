@@ -4,6 +4,15 @@ Format nach [Keep a Changelog](https://keepachangelog.com/de/1.1.0/), Versionier
 [SemVer](https://semver.org/lang/de/). Die Versionsnummer wird ausschließlich im Meta-Tag
 `app-version` in `index.html` gepflegt; `js/version.js` liest sie von dort.
 
+## [0.1.3] – 2026-08-19
+
+### Changed
+
+- Der Tidenhub steht jetzt rechts neben der großen Uhrzeit in der Übersichtskarte, in der
+  kleinen Schriftgröße der Kennzahlen und an der Unterkante der Uhrzeit ausgerichtet.
+- Die Kennzahlen darunter stehen wieder als einzeilige Reihe zu drei (Höhe dann, Aktuell,
+  Tendenz); das 2×2-Raster aus 0.1.1 ist entfallen.
+
 ## [0.1.2] – 2026-08-19
 
 ### Fixed

@@ -123,8 +123,17 @@ export function renderHero(root, view) {
   head.appendChild(el('span', 'hero__kind', isHigh ? 'Nächstes Hochwasser' : 'Nächstes Niedrigwasser'));
 
   const time = el('div', 'hero__time');
-  time.appendChild(el('strong', '', fmtTime(next.tl)));
-  time.appendChild(el('span', 'hero__unit', 'Uhr'));
+  const clock = el('div', 'hero__clock');
+  clock.appendChild(el('strong', '', fmtTime(next.tl)));
+  clock.appendChild(el('span', 'hero__unit', 'Uhr'));
+  time.appendChild(clock);
+  // Tidal range sits at the far right of the clock row, in the small type of the
+  // key figures rather than the display size of the clock.
+  if (dayRange !== null && dayRange !== undefined) {
+    const range = fact('Tidenhub', fmtRange(dayRange));
+    range.classList.add('fact--trailing');
+    time.appendChild(range);
+  }
 
   const relative = el('div', 'hero__relative', fmtRelative(next.tl, nowTl));
   const dayHint = fmtDayLabel(next.tl, nowTl);
@@ -137,9 +146,6 @@ export function renderHero(root, view) {
   }
   if (trend !== 'unknown') {
     facts.appendChild(fact('Tendenz', trend === 'rising' ? 'auflaufend' : 'ablaufend'));
-  }
-  if (dayRange !== null && dayRange !== undefined) {
-    facts.appendChild(fact('Tidenhub', fmtRange(dayRange)));
   }
 
   const children = [head, time, relative, facts];

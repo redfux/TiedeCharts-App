@@ -98,20 +98,9 @@
 
 .hero__time {
   display: flex;
-  align-items: flex-end;
-  gap: var(--md-space-3);
-  margin-top: var(--md-space-1);
-}
-
-.hero__clock {
-  display: flex;
   align-items: baseline;
   gap: var(--md-space-2);
-}
-
-.fact--trailing {
-  margin-left: auto;
-  text-align: right;
+  margin-top: var(--md-space-1);
 }
 
 .hero__time strong {
@@ -131,9 +120,12 @@
 }
 
 .hero__facts {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--md-space-2) var(--md-space-6);
+  /* One row of four wherever it fits. Measured against the longest possible
+     contents ("auflaufend", "−99,99 m") that needs a viewport of 392 px, so the
+     switch to two by two happens below 400 px. */
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--md-space-3);
   margin-top: var(--md-space-4);
   padding-top: var(--md-space-3);
   border-top: 1px solid color-mix(in oklab, currentColor 22%, transparent);
@@ -353,6 +345,13 @@
 }
 
 /* --- Wider screens: tablet is the widest supported target ------------- */
+@media (min-width: 400px) {
+  .hero__facts {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    column-gap: var(--md-space-2);
+  }
+}
+
 @media (min-width: 700px) {
   .page {
     padding: var(--md-space-6) var(--md-space-5) 0;

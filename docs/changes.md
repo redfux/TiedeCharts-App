@@ -19,6 +19,12 @@ _Noch keine Wünsche eingetragen._
 
 ## Erledigt
 
+- „setzt den Tiedenhub wieder runter, aber mache ein 1*4 Raster und nur bei zu kleinen
+  Bildschirm ein 2*2 Raster. auf meinem Pixel 9a ist definitiv genug Platz für 1*4"
+  ✅ 19.08.2026 – Tidenhub wieder in der Kennzahlenreihe; 1×4 ab 400 px Viewport-Breite
+  (Grenze aus der gemessenen Mindestbreite von 392 px abgeleitet), darunter 2×2. Siehe v0.1.4
+  in `releases.md`.
+
 - „das mit dem 2*2 Raster was wir vorhin designt haben sieht nicht so cool aus. baue das
   wieder auf die 1*3 varient von vorher zurück und setzt den Tiedenhub ganz rechts neben die
   große Anzeige mit der Uhrzeit, aber genauso kleine von der Schriftart wie Jetzt"

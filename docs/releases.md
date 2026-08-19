@@ -4,6 +4,17 @@ Format nach [Keep a Changelog](https://keepachangelog.com/de/1.1.0/), Versionier
 [SemVer](https://semver.org/lang/de/). Die Versionsnummer wird ausschließlich im Meta-Tag
 `app-version` in `index.html` gepflegt; `js/version.js` liest sie von dort.
 
+## [0.1.4] – 2026-08-19
+
+### Changed
+
+- Der Tidenhub steht wieder als vierte Kennzahl in der Reihe unter der Uhrzeit, nicht mehr
+  neben ihr.
+- Die Kennzahlen stehen als einzeilige Reihe zu vier, sobald der Bildschirm dafür breit genug
+  ist, und nur darunter als 2×2-Raster. Die Grenze liegt bei 400 px Viewport-Breite: gemessen
+  an den längstmöglichen Inhalten („auflaufend", „−99,99 m") braucht die Reihe 392 px, ein
+  Pixel 9a (412 px) liegt also darüber, ein iPhone 13 (390 px) darunter.
+
 ## [0.1.3] – 2026-08-19
 
 ### Changed

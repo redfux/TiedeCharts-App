@@ -2,6 +2,30 @@
 
 ## Behoben
 
+### Firefox für Android markierte Text beim Tippen auf die Aufklapp-Pfeile (v0.1.6)
+
+**Symptom:** Ein Tap auf die Zeile eines Folgetages öffnete in Firefox für Android nicht nur
+das Akkordeon, sondern markierte Text und blendete die Kopieren-Leiste des Systems ein. In
+Chrome trat das nicht auf.
+
+**Ursache:** Firefox behandelt ein `<summary>` mit eigenem Layout (`display: flex`) beim
+Antippen als Textinhalt und startet eine Auswahl. Ohne `user-select: none` gilt für
+Bedienelemente dieselbe Auswahllogik wie für Fließtext.
+
+**Lösung:** `user-select: none`, `-webkit-touch-callout: none` und
+`touch-action: manipulation` für Bedienelemente – die Aufklapp-Zeile, alle Schaltflächen und
+die als Schaltfläche genutzten Listenzeilen der Stationsauswahl. Das Diagramm bekommt
+`user-select: none` ebenfalls, weil dort mit dem Finger gezogen wird. **Nicht** betroffen sind
+die Datenzeilen: Uhrzeiten und Höhen in der Tagesliste und in den aufgeklappten Folgetagen
+bleiben markierbar und kopierbar.
+
+**Prüfung:** In dieser Entwicklungsumgebung steht nur Chromium zur Verfügung (Firefox ist
+nicht installiert und ohne Netzzugang nicht nachinstallierbar), das ursprüngliche Verhalten
+ließ sich also nicht gegenprüfen. Verifiziert wurde: die Regel greift an den
+Bedienelementen, ein Ziehen über die Aufklapp-Zeile erzeugt keine Auswahl, ein Ziehen über
+eine Ereigniszeile weiterhin schon, und Tap, Tastatur sowie Diagramm-Tooltip funktionieren
+unverändert. Ob die Kopieren-Leiste in Firefox verschwindet, bitte auf dem Gerät bestätigen.
+
 ### Alte Version blieb nach einer Aktualisierung aktiv (v0.1.2)
 
 **Symptom:** Nach dem Ausrollen von 0.1.1 stand im Footer weiter `v0.1.0`, und geänderter

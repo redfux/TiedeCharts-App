@@ -4,6 +4,15 @@ Format nach [Keep a Changelog](https://keepachangelog.com/de/1.1.0/), Versionier
 [SemVer](https://semver.org/lang/de/). Die Versionsnummer wird ausschließlich im Meta-Tag
 `app-version` in `index.html` gepflegt; `js/version.js` liest sie von dort.
 
+## [0.1.6] – 2026-08-19
+
+### Fixed
+
+- Firefox für Android markierte beim Tippen auf die Aufklapp-Zeile eines Folgetages Text und
+  zeigte die Kopieren-Leiste. Bedienelemente (Aufklapp-Zeilen, Schaltflächen, Listenzeilen der
+  Stationsauswahl) und das Diagramm sind jetzt von der Textauswahl ausgenommen; Datenzeilen
+  bleiben markierbar. Details in `docs/bugs.md`.
+
 ## [0.1.5] – 2026-08-19
 
 ### Changed

@@ -19,6 +19,12 @@ _Noch keine Wünsche eingetragen._
 
 ## Erledigt
 
+- „wenn ich im Firefox auf die Aufklapp-Pfeile bei der Vorschau tippe, markiert er immer
+  irgendetwas und der Kopieren-Dialog öffnet sich […] unter Chrome tritt das Problem nicht auf"
+  ✅ 19.08.2026 – Bedienelemente und Diagramm von der Textauswahl ausgenommen
+  (`user-select: none`), Datenzeilen bleiben kopierbar. Siehe v0.1.6 in `releases.md` und
+  `bugs.md`.
+
 - „verteile die vier anzeigen gleichmäßiger über die Breite, Tiedenhub kann noch weiter nach
   rechts"
   ✅ 19.08.2026 – Einzeilige Kennzahlen werden mit `space-between` über die volle Breite

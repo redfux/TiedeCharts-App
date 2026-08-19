@@ -31,7 +31,7 @@ Ortssuche ───┘                    │
 | `js/sun.js` | Sonnenauf-/-untergang für die Nachtschattierung |
 | `js/format.js` | Zeit-, Höhen- und Entfernungsformatierung (deutsch) |
 | `js/ui.js` | DOM-Aufbau der Ansichten |
-| `js/version.js` | einzige Stelle mit der Versionsnummer |
+| `js/version.js` | liest die Versionsnummer aus dem Meta-Tag `app-version` |
 | `sw.js` | Offline-Cache der App-Shell |
 
 ## Datenquelle: warum Open-Meteo
@@ -145,10 +145,13 @@ entfällt jede Font-Datei, `/fonts` bleibt leer.
 
 Zwei getrennte Ebenen:
 
-- **App-Shell** im Service Worker (`sw.js`). Cache-Name enthält die Version aus
-  `js/version.js` (per `?v=`-Parameter bei der Registrierung), eine Versionserhöhung
-  invalidiert also automatisch. Navigationsanfragen: Netz zuerst, Cache als Rückfall;
-  statische Dateien: Cache zuerst.
+- **App-Shell** im Service Worker (`sw.js`). Navigationsanfragen: Netz zuerst, Cache als
+  Rückfall. Statische Dateien: stale-while-revalidate – der Cache antwortet sofort, im
+  Hintergrund wird erneuert. Der Cache-Name enthält die Version, die bei der Registrierung als
+  `?v=`-Parameter übergeben wird; ein Versionssprung verwirft die alten Caches beim Aktivieren.
+  Damit das trägt, muss die Versionsnummer aus einer Quelle kommen, die selbst nicht im Cache
+  liegt – siehe unten. Ist ein neuer Service Worker aktiv, bietet die App einen Neustart an,
+  weil der laufende Code noch aus dem alten Cache stammt.
 - **Gezeitendaten** pro Station im `localStorage` (`tiedecharts.cache.<id>`). Bewusst nicht
   im Service Worker: nur die App weiß, wie alt eine Serie sein darf, und kann veraltete
   Werte in der Oberfläche als solche kennzeichnen. Frische Daten (< 3 h) werden ohne
@@ -157,6 +160,14 @@ Zwei getrennte Ebenen:
 
 Gespeichert werden außerdem die Einstellungen (`tiedecharts.prefs`): gewählte Station,
 Ortsbezeichnung, Farbschema und ob dem Gerätestandort gefolgt wird.
+
+## Wo die Versionsnummer steht
+
+Im Meta-Tag `app-version` in `index.html` – und nur dort. Das ist keine Stilfrage, sondern
+Voraussetzung für die Cache-Invalidierung: `index.html` wird immer zuerst aus dem Netz geholt,
+jede JavaScript-Datei kann dagegen aus dem Cache stammen. Läge die Nummer in einem Modul,
+würde sie nach einer Aktualisierung aus dem alten Cache gelesen, der daraus gebildete
+Cache-Name bliebe gleich und der Cache würde nie erneuert (siehe `docs/bugs.md`).
 
 ## Fehlerbehandlung
 

@@ -1,8 +1,32 @@
 # Änderungshistorie
 
 Format nach [Keep a Changelog](https://keepachangelog.com/de/1.1.0/), Versionierung nach
-[SemVer](https://semver.org/lang/de/). Die Versionsnummer wird ausschließlich in
-`js/version.js` gepflegt.
+[SemVer](https://semver.org/lang/de/). Die Versionsnummer wird ausschließlich im Meta-Tag
+`app-version` in `index.html` gepflegt; `js/version.js` liest sie von dort.
+
+## [0.1.2] – 2026-08-19
+
+### Fixed
+
+- Der Footer zeigte nach einer Aktualisierung weiter die alte Version, und neue Programmstände
+  kamen nicht auf dem Gerät an. Ursache war ein Kreisschluss: die Versionsnummer stand in
+  `js/version.js`, wurde aber selbst aus dem Cache des Service Workers geliefert – damit blieb
+  der daraus gebildete Cache-Name unverändert und der Cache wurde nie erneuert.
+
+### Changed
+
+- Die Versionsnummer steht jetzt im Meta-Tag `app-version` in `index.html` (weiterhin genau
+  eine Stelle). `index.html` wird immer zuerst aus dem Netz geholt, die Nummer ist also nie
+  veraltet; `js/version.js` liest sie aus dem Dokument.
+- Statische Dateien liefert der Service Worker nach dem Muster stale-while-revalidate statt
+  cache-first: der Cache antwortet weiterhin sofort, wird aber im Hintergrund erneuert. Ein
+  neuer Stand kommt damit beim nächsten Start an, auch ohne Versionssprung.
+
+### Added
+
+- Hinweis mit Schaltfläche „Jetzt neu starten", sobald eine neuere Version installiert wurde.
+  Der laufende Code stammt aus dem Cache; ohne diesen Hinweis bliebe eine stille Altversion
+  aktiv, bis der Nutzer zufällig neu lädt.
 
 ## [0.1.1] – 2026-08-19
 

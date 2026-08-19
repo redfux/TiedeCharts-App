@@ -2,9 +2,13 @@
  * Single source of truth for the app version.
  * thought up by human, coded by ai
  *
- * The footer reads it, the service worker gets it as a registration query
- * parameter and derives its cache name from it. Bumping the version here is
- * therefore enough to invalidate the offline cache. Keep in sync with
- * docs/releases.md.
+ * The literal itself sits in the <meta name="app-version"> tag of index.html and
+ * is read from there. Reason: this module is a cached asset, while index.html is
+ * always fetched network first. A version kept in here would be served from the
+ * old cache after a deployment - and since it also names the service worker
+ * cache, the cache would then never be invalidated. Keep in sync with
+ * docs/releases.md by editing the meta tag.
  */
-export const APP_VERSION = '0.1.1';
+const META_VERSION = document.querySelector('meta[name="app-version"]');
+
+export const APP_VERSION = (META_VERSION && META_VERSION.content) || 'dev';

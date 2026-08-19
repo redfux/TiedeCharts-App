@@ -2,6 +2,34 @@
 
 ## Behoben
 
+### Alte Version blieb nach einer Aktualisierung aktiv (v0.1.2)
+
+**Symptom:** Nach dem Ausrollen von 0.1.1 stand im Footer weiter `v0.1.0`, und geänderter
+Programmcode wirkte nicht.
+
+**Ursache:** Ein Kreisschluss in der Cache-Invalidierung. Der Service Worker bildete seinen
+Cache-Namen aus der Version, die ihm `js/app.js` bei der Registrierung übergab. Diese Version
+stammte aus `js/version.js` – einer Datei, die der Service Worker selbst nach dem Muster
+cache-first auslieferte. Nach einem Versionssprung wurde also weiterhin die alte
+`js/version.js` geladen, der Cache-Name blieb identisch, der Cache wurde nie verworfen: der
+Mechanismus konnte sich nur selbst bestätigen. Die Behauptung in `docs/architecture.md`, eine
+Versionserhöhung invalidiere den Cache automatisch, war damit falsch.
+
+**Lösung:** Dreifach abgesichert.
+
+1. Die Versionsnummer steht im Meta-Tag `app-version` in `index.html`. Dieses Dokument wird
+   immer zuerst aus dem Netz geholt (network-first), kann also nie veraltet sein.
+   `js/version.js` liest den Wert nur noch aus dem Dokument – es bleibt eine einzige Stelle.
+2. Statische Dateien werden stale-while-revalidate ausgeliefert: der Cache antwortet sofort,
+   im Hintergrund wird erneuert. Ein neuer Stand kommt damit auch ohne Versionssprung an.
+3. Sobald ein neuer Service Worker aktiv ist, bietet die App „Jetzt neu starten" an, weil der
+   laufende Code weiterhin aus dem alten Cache stammt.
+
+**Nachweis:** Ein automatisierter Test rollt bei laufender Installation eine geänderte Version
+aus und lädt neu. Ergebnis: Footer sofort auf dem neuen Wert, Cache-Name gewechselt, alter
+Cache verworfen, Hinweis erscheint, geänderter Code nach dem Neustart aktiv, Offline-Betrieb
+weiter funktionsfähig.
+
 ### `hidden` wirkt nicht auf SVG-Elementen (v0.1.0, während der Entwicklung)
 
 **Symptom:** Die Werteanzeige (Fadenkreuz mit Tooltip) im Diagramm erschien nie, obwohl der

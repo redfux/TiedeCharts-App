@@ -8,7 +8,7 @@ Es gelten die Regeln des Web-App-Masterprompts; sie werden hier nicht wiederholt
 
 ## Aktueller Stand
 
-v0.1.1 umgesetzt und im Browser getestet (Chromium, iPhone- und iPad-Viewport, hell und
+v0.1.2 umgesetzt und im Browser getestet (Chromium, iPhone- und iPad-Viewport, hell und
 dunkel, inklusive Offline- und Fehlerpfad). Offene Ideen stehen in `docs/changes.md`.
 
 ## Arbeitsweise
@@ -18,7 +18,9 @@ dunkel, inklusive Offline- und Fehlerpfad). Offene Ideen stehen in `docs/changes
 
 ## Projektspezifische Hinweise
 
-- Version nur in `js/version.js` ändern; Footer und Service-Worker-Cache leiten sich daraus ab.
+- Version nur im Meta-Tag `app-version` in `index.html` ändern (nicht in `js/version.js` –
+  das liest sie von dort). Footer und Service-Worker-Cache leiten sich daraus ab; der Grund für
+  diesen Umweg steht in `docs/bugs.md`.
 - Zeitstempel sind „local epoch" (Stations-Wanduhrzeit als UTC). Immer `getUTC*` verwenden,
   Begründung in `docs/architecture.md`.
 - SVG im Diagramm ausschließlich über CSS-Klassen einfärben und ein-/ausblenden, nicht über

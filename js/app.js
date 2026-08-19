@@ -649,8 +649,33 @@ function debounce(fn, wait) {
   };
 }
 
-/** Register the offline cache; failures are not user relevant. */
+/**
+ * Register the offline cache and watch for a newer deployment. Failures are not
+ * user relevant, but a silently outdated app is: the running code comes from the
+ * cache, so once a new worker has taken over the user gets an explicit offer to
+ * restart into the new version.
+ */
 function registerServiceWorker() {
   if (!('serviceWorker' in navigator)) return;
-  navigator.serviceWorker.register(`sw.js?v=${APP_VERSION}`).catch(() => {});
+  navigator.serviceWorker.register(`sw.js?v=${APP_VERSION}`).then((registration) => {
+    registration.addEventListener('updatefound', () => {
+      const installing = registration.installing;
+      // No controller means this is the first installation - nothing to announce.
+      if (!installing || !navigator.serviceWorker.controller) return;
+      installing.addEventListener('statechange', () => {
+        if (installing.state === 'activated') announceUpdate();
+      });
+    });
+  }).catch(() => {});
+}
+
+/** Offer a reload into a freshly installed version. */
+function announceUpdate() {
+  showBanner(dom.banner, {
+    kind: 'info',
+    message: 'Eine neuere Version von TiedeCharts ist geladen.',
+    actionLabel: 'Jetzt neu starten',
+    onAction: () => window.location.reload(),
+    iconName: 'refresh'
+  });
 }

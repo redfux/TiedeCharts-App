@@ -4,6 +4,10 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; form-action 'none'; img-src 'self' data:; style-src 'self'; script-src 'self'; manifest-src 'self'; connect-src 'self' https://marine-api.open-meteo.com https://geocoding-api.open-meteo.com">
+  <!-- Single source of truth for the app version. It lives in the document
+       because index.html is always fetched network first and can therefore never
+       be served from a stale cache; js/version.js reads it from here. -->
+  <meta name="app-version" content="0.1.2">
   <title>TiedeCharts – Ebbe und Flut</title>
   <meta name="description" content="Gezeiten, Hoch- und Niedrigwasserzeiten und Tidenverlauf für europäische Küstenstandorte.">
   <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">

@@ -9,6 +9,11 @@
  * Tide data is not cached here. It is stored per station in localStorage by the
  * app, which knows how old a series may get and can label stale values in the
  * interface - a cache entry could not.
+ *
+ * Static files use stale-while-revalidate rather than cache-first: the cached
+ * copy answers immediately (so offline works and the app starts instantly), and
+ * the background refresh means a deployment is picked up on the next load even
+ * if the cache name did not change.
  */
 
 const VERSION = new URL(self.location.href).searchParams.get('v') || 'dev';
@@ -71,7 +76,7 @@ self.addEventListener('fetch', (event) => {
     event.respondWith(networkFirst(request));
     return;
   }
-  event.respondWith(cacheFirst(request));
+  event.respondWith(staleWhileRevalidate(request, event));
 });
 
 /**
@@ -94,19 +99,25 @@ async function networkFirst(request) {
 }
 
 /**
- * Static assets: cache first, then network, storing what arrives.
+ * Static assets: answer from the cache at once, refresh it in the background.
  * @param {Request} request
+ * @param {FetchEvent} event keeps the worker alive for the background refresh
  * @returns {Promise<Response>}
  */
-async function cacheFirst(request) {
+async function staleWhileRevalidate(request, event) {
   const cache = await caches.open(CACHE_NAME);
   const cached = await cache.match(request);
-  if (cached) return cached;
-  try {
-    const response = await fetch(request);
-    if (response && response.ok && response.type === 'basic') cache.put(request, response.clone());
-    return response;
-  } catch (error) {
-    return Response.error();
+
+  const refresh = fetch(request)
+    .then((response) => {
+      if (response && response.ok && response.type === 'basic') cache.put(request, response.clone());
+      return response;
+    })
+    .catch(() => null);
+
+  if (cached) {
+    if (event) event.waitUntil(refresh);
+    return cached;
   }
+  return (await refresh) || Response.error();
 }

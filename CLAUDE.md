@@ -11,6 +11,11 @@ Es gelten die Regeln des Web-App-Masterprompts; sie werden hier nicht wiederholt
 v0.1.1 umgesetzt und im Browser getestet (Chromium, iPhone- und iPad-Viewport, hell und
 dunkel, inklusive Offline- und Fehlerpfad). Offene Ideen stehen in `docs/changes.md`.
 
+## Arbeitsweise
+
+- Entwicklung und Pushes gehen **direkt auf `main`** (so vom Projektinhaber festgelegt), auch
+  wenn eine Session mit einem anderen Arbeitsbranch startet.
+
 ## Projektspezifische Hinweise
 
 - Version nur in `js/version.js` ändern; Footer und Service-Worker-Cache leiten sich daraus ab.

@@ -110,7 +110,7 @@ export function renderLocation(root, view) {
  * @param {object} view
  */
 export function renderHero(root, view) {
-  const { next, currentLevel, trend, nowTl, weakTide, curveRange } = view;
+  const { next, currentLevel, trend, dayRange, nowTl, weakTide, curveRange } = view;
 
   if (!next) {
     fill(root, el('p', 'meta', noTideExplanation(curveRange)));
@@ -137,6 +137,9 @@ export function renderHero(root, view) {
   }
   if (trend !== 'unknown') {
     facts.appendChild(fact('Tendenz', trend === 'rising' ? 'auflaufend' : 'ablaufend'));
+  }
+  if (dayRange !== null && dayRange !== undefined) {
+    facts.appendChild(fact('Tidenhub', fmtRange(dayRange)));
   }
 
   const children = [head, time, relative, facts];
@@ -182,17 +185,14 @@ function fact(label, value) {
  * @param {object} view
  */
 export function renderToday(root, view) {
-  const { events, range, curveRange, nowTl } = view;
+  const { events, curveRange, nowTl } = view;
   if (!events.length) {
     fill(root, el('p', 'meta', noTideExplanation(curveRange)));
     return;
   }
-  const list = eventList(events, nowTl);
-  const children = [list];
-  if (range !== null) {
-    children.push(el('p', 'meta', `Tidenhub heute: ${fmtRange(range)}`));
-  }
-  fill(root, ...children);
+  // The tidal range is shown in the overview card above; repeating it here would
+  // be the same number twice on one screen.
+  fill(root, eventList(events, nowTl));
 }
 
 /**

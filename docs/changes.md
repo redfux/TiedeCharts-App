@@ -19,4 +19,13 @@ _Noch keine Wünsche eingetragen._
 
 ## Erledigt
 
-_Noch keine Einträge._
+- „kannst du in der Übersicht vom aktuellen Standort rechts neben der Tendenz noch den Wert
+  für den Max. Tiedenhub an dem Tag in m angeben"
+  ✅ 19.08.2026 – Kennzahl „Tidenhub" in der Übersichtskarte ergänzt (maximaler Tidenhub des
+  Tages in Metern, 2×2-Raster auf dem Telefon); die dadurch doppelte Zeile in der Karte
+  „Heute" entfernt. Siehe v0.1.1 in `releases.md`.
+- „zwischen dem Ortsauswahl Kasten und dem darunter liegenden Übersichtsfeld ist keine
+  Abstand. mache es so, das der Abstand hier des selbe ist, wie zwischen den restlichen
+  Kästen."
+  ✅ 19.08.2026 – Abstand über einen Grid-Abstand der Seite gelöst, überall 12 px; der leere
+  Meldungsplatzhalter zwischen den Karten wird ausgeblendet. Siehe v0.1.1 in `releases.md`.

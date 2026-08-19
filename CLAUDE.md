@@ -8,7 +8,7 @@ Es gelten die Regeln des Web-App-Masterprompts; sie werden hier nicht wiederholt
 
 ## Aktueller Stand
 
-v0.1.0 vollständig umgesetzt und im Browser getestet (Chromium, iPhone-Viewport, hell und
+v0.1.1 umgesetzt und im Browser getestet (Chromium, iPhone- und iPad-Viewport, hell und
 dunkel, inklusive Offline- und Fehlerpfad). Offene Ideen stehen in `docs/changes.md`.
 
 ## Projektspezifische Hinweise

@@ -4,6 +4,28 @@ Format nach [Keep a Changelog](https://keepachangelog.com/de/1.1.0/), Versionier
 [SemVer](https://semver.org/lang/de/). Die Versionsnummer wird ausschließlich in
 `js/version.js` gepflegt.
 
+## [0.1.1] – 2026-08-19
+
+### Added
+
+- Kennzahl „Tidenhub" in der Übersichtskarte, rechts neben der Tendenz: der maximale
+  Tidenhub des laufenden Tages in Metern.
+
+### Changed
+
+- Kennzahlen der Übersichtskarte als 2×2-Raster auf Telefonen und als einzeilige Reihe ab
+  480 px Breite, damit kein Wert umbricht und keine einzelne Kennzahl in einer eigenen Reihe
+  hängt.
+- Die Zeile „Tidenhub heute" in der Karte „Heute" entfällt, weil der Wert nun direkt darüber
+  in der Übersicht steht.
+
+### Fixed
+
+- Fehlender Abstand zwischen der Ortsauswahl-Karte und der Übersichtskarte. Ursache war der
+  leere Platzhalter für Statusmeldungen zwischen beiden Karten: er unterbrach den
+  Nachbar-Selektor `.card + .card`. Der Seitenabstand kommt jetzt aus einem Grid-Abstand und
+  ist zwischen allen Kästen gleich (12 px), auch wenn eine Statusmeldung sichtbar ist.
+
 ## [0.1.0] – 2026-08-18
 
 ### Added

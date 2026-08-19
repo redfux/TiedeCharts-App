@@ -367,13 +367,13 @@ function renderLivePart(view) {
     next: nextExtreme(view.extremes, view.nowTl),
     currentLevel: valueAt(view.series.samples, view.nowTl),
     trend: trendAt(view.series.samples, view.nowTl),
+    dayRange: view.todayRange,
     nowTl: view.nowTl,
     weakTide: (view.todayRange ?? view.curveRange ?? Infinity) < WEAK_TIDE_RANGE_M,
     curveRange: view.curveRange
   });
   renderToday(dom.today, {
     events: view.todaysEvents,
-    range: view.todayRange,
     curveRange: view.curveRange,
     nowTl: view.nowTl
   });

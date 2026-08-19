@@ -19,6 +19,11 @@ _Noch keine Wünsche eingetragen._
 
 ## Erledigt
 
+- „verteile die vier anzeigen gleichmäßiger über die Breite, Tiedenhub kann noch weiter nach
+  rechts"
+  ✅ 19.08.2026 – Einzeilige Kennzahlen werden mit `space-between` über die volle Breite
+  verteilt, der Tidenhub sitzt rechtsbündig am Rand. Siehe v0.1.5 in `releases.md`.
+
 - „setzt den Tiedenhub wieder runter, aber mache ein 1*4 Raster und nur bei zu kleinen
   Bildschirm ein 2*2 Raster. auf meinem Pixel 9a ist definitiv genug Platz für 1*4"
   ✅ 19.08.2026 – Tidenhub wieder in der Kennzahlenreihe; 1×4 ab 400 px Viewport-Breite

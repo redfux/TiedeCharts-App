@@ -4,6 +4,15 @@ Format nach [Keep a Changelog](https://keepachangelog.com/de/1.1.0/), Versionier
 [SemVer](https://semver.org/lang/de/). Die Versionsnummer wird ausschließlich im Meta-Tag
 `app-version` in `index.html` gepflegt; `js/version.js` liest sie von dort.
 
+## [0.1.5] – 2026-08-19
+
+### Changed
+
+- Die vier Kennzahlen der Übersichtskarte verteilen sich in der einzeiligen Darstellung
+  gleichmäßig über die volle Breite (`space-between`) statt in gleich breiten Spalten zu
+  stehen. Die erste steht am linken, der Tidenhub am rechten Rand und ist rechtsbündig
+  gesetzt; die Zwischenräume sind gleich groß.
+
 ## [0.1.4] – 2026-08-19
 
 ### Changed

@@ -346,9 +346,21 @@
 
 /* --- Wider screens: tablet is the widest supported target ------------- */
 @media (min-width: 400px) {
+  /* One row: spread the four figures across the full width instead of packing
+     them into equal columns, so the last one sits flush with the right edge. */
   .hero__facts {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    column-gap: var(--md-space-2);
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    gap: var(--md-space-2);
+  }
+
+  .hero__facts .fact {
+    min-width: 0;
+  }
+
+  .hero__facts .fact:last-child {
+    text-align: right;
   }
 }
 
